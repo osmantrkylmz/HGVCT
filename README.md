@@ -8,7 +8,8 @@ Yazılımın aşağıdaki araçlar kullanılarak geliştirilmiştir. Çalıştı
 Python; versiyon 3.6.3
 
 Django; versiyon 1.10.6
---------
+
+---
 
 BWA; versiyon 0.7.15
 
@@ -21,6 +22,7 @@ Vcfutils.pl
 SnpSift; versiyon 4.3
 
 SnpEff; versiyon 4.3
+
 ----------------------------------------------
 Bunların yanı sıra yazılımın çalışması için analiz hattı sırasında gerekli olan veritabanlarının belirtilen yerlerde olması gerekmektedir.
 
