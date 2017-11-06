@@ -15,8 +15,6 @@ Samtools; versiyon 1.4.1
 
 BCFtools; versiyon 1.4.1
 
-Vcfutils.pl
-
 SnpSift; versiyon 4.3
 
 SnpEff; versiyon 4.3
