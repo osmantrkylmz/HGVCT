@@ -9,8 +9,6 @@ Python; versiyon 3.6.3
 
 Django; versiyon 1.10.6
 
----
-
 BWA; versiyon 0.7.15
 
 Samtools; versiyon 1.4.1
