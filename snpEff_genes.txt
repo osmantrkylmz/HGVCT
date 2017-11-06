@@ -1,0 +1,9 @@
+# The following table is formatted as tab separated values. 
+#GeneName	GeneId	TranscriptId	BioType	variants_impact_HIGH	variants_impact_LOW	variants_impact_MODERATE	variants_impact_MODIFIER	variants_effect_3_prime_UTR_variant	variants_effect_frameshift_variant	variants_effect_intron_variant	variants_effect_missense_variant	variants_effect_sequence_feature	variants_effect_splice_acceptor_variant	variants_effect_splice_region_variant	variants_effect_synonymous_variant
+AFF3	AFF3	NM_001025108.1		0	0	0	1	0	0	1	0	0	0	0	0
+AFF3	AFF3	NM_002285.2		0	0	0	1	0	0	1	0	0	0	0	0
+CFTR	CFTR	NM_000492.3		1	3	3	14	2	0	15	3	0	1	2	1
+HBB	HBB	NM_000518.4		1	2	0	8	1	1	7	0	1	0	1	1
+MEFV	MEFV	NM_000243.2		0	1	2	1	0	0	1	2	0	0	0	1
+MEFV	MEFV	NM_001198536.1		0	0	2	2	0	0	2	2	0	0	0	0
+ZSWIM5	ZSWIM5	NM_020883.1		0	0	0	2	0	0	2	0	0	0	0	0
