@@ -1,0 +1,112 @@
+{% load staticfiles %}
+<html>
+	{% load static %}
+	<head>
+		<title>Anasayfa</title>
+
+		<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"> </script>
+		<link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+		<script type="text/javascript" src="{% static 'd3/d3.min.js' %}"> </script>
+		<link rel="stylesheet" href="../static/bootstrap3/css/bootstrap.min.css">
+		<script type="text/javascript" src="{% static 'bootstrap3/js/bootstrap.min.js' %}"> </script>
+		<link rel="stylesheet" href="../static/css/landing-page.css">
+
+		<style>
+			.btn1{background-color:#176C87;}
+
+			.btn2{background-color:#265129;}
+
+			.btn3{background-color:#94372C;}
+
+			.button {
+				margin-top:20px; /* Green */
+				border: 4px;
+				border-style: solid;
+				border-color: #E4FAFA;
+				border-radius: 20%;;
+				color: #E4FAFA;
+				padding: 25px 00px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				-webkit-transition-duration: 0.4s; /* Safari */
+	    	transition-duration: 0.4s;
+			}
+
+			.button:hover {
+		    background-color: white	; /* Green */
+		    color: grey;
+			}
+
+			.navbar-inverse { background-color: #0F355C}
+			.navbar-inverse .navbar-nav>.active>a:hover,.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { background-color: #0B0E3B}
+			.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { background-color: #262626}
+			.dropdown-menu { background-color: #0F355C}
+			.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background-color: #428BCA}
+			.navbar-inverse { background-image: none; }
+			.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background-image: none; }
+			.navbar-inverse { border-color: #0F355C}
+			.navbar-inverse .navbar-brand { color: #C7C7C7}
+			.navbar-inverse .navbar-brand:hover { color: #FFFFFF}
+			.navbar-inverse .navbar-nav>li>a { color: #C7C7C7}
+			.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { color: #FFFFFF}
+			.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { color: #FFFFFF}
+			.navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus { color: #FFFFFF}
+			.dropdown-menu>li>a { color: #C7C7C7}
+			.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { color: #FFFFFF}
+			.navbar-inverse .navbar-nav>.dropdown>a .caret { border-top-color: #FAFFE8}
+			.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-top-color: #FFFFFF}
+			.navbar-inverse .navbar-nav>.dropdown>a .caret { border-bottom-color: #FAFFE8}
+			.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-bottom-color: #FFFFFF}
+
+
+		</style>
+	</head>
+	<body>
+
+		<!-- Header -->
+    <header class="intro-header">
+      <div class="container">
+        <div class="intro-message">
+          <h1>Ana Sayfa</h1>
+          <h3>Yeni Nesil Dizileme İnsan Verisi Analiz Aracı</h3>
+          <hr class="intro-divider">
+          <ul class="list-inline intro-social-buttons">
+            <li class="list-inline-item">
+              <a href="/upload" class="btn btn-secondary btn-lg">
+                <i class="fa fa-upload"></i>
+                <span class="network-name">Dosya Yükleme / Analiz</span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="/analysisInformation/" class="btn btn-secondary btn-lg">
+                <i class="fa fa-line-chart"></i>
+                <span class="network-name">Analiz Durumu</span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="/results" class="btn btn-secondary btn-lg">
+                <i class="fa fa-table"></i>
+                <span class="network-name">Sonuçlar</span>
+              </a>
+            </li>
+						<li class="list-inline-item">
+              <a href="/download" class="btn btn-secondary btn-lg">
+                <i class="fa fa-download"></i>
+                <span class="network-name">Dosya İndir</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+		<script type="text/javascript">
+		d3.select("body").style("background-image","url(static/background/black.jpg)")
+
+
+		</script>
+
+	</body>
+</html>

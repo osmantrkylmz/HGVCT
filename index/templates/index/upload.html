@@ -1,0 +1,178 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	{% load static %}
+	<head>
+		<title>Dosya Yükleme</title>
+
+		<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"> </script>
+		<link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+		<script type="text/javascript" src="{% static 'd3/d3.min.js' %}"> </script>
+		<link rel="stylesheet" href="../static/bootstrap3/css/bootstrap.min.css">
+		<script type="text/javascript" src="{% static 'bootstrap3/js/bootstrap.min.js' %}"> </script>
+
+		<style>
+
+			.navbar-inverse { background-color: #0F355C}
+			.navbar-inverse .navbar-nav>.active>a:hover,.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { background-color: #0B0E3B}
+			.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { background-color: #262626}
+			.dropdown-menu { background-color: #0F355C}
+			.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background-color: #428BCA}
+			.navbar-inverse { background-image: none; }
+			.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background-image: none; }
+			.navbar-inverse { border-color: #0F355C}
+			.navbar-inverse .navbar-brand { color: #C7C7C7}
+			.navbar-inverse .navbar-brand:hover { color: #FFFFFF}
+			.navbar-inverse .navbar-nav>li>a { color: #C7C7C7}
+			.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { color: #FFFFFF}
+			.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { color: #FFFFFF}
+			.navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus { color: #FFFFFF}
+			.dropdown-menu>li>a { color: #C7C7C7}
+			.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { color: #FFFFFF}
+			.navbar-inverse .navbar-nav>.dropdown>a .caret { border-top-color: #FAFFE8}
+			.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-top-color: #FFFFFF}
+			.navbar-inverse .navbar-nav>.dropdown>a .caret { border-bottom-color: #FAFFE8}
+			.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-bottom-color: #FFFFFF}
+
+
+
+		</style>
+
+	</head>
+	<body>
+
+		<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container" style ="width: 45%">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+		  	<li>
+          <a href="\">Ana Sayfa</a>
+        </li>
+				<li>
+	        <a href="/upload/">Dosya Yükleme <b></b></a>
+	      </li>
+        <li>
+          <a href="/analysisInformation/">Analiz Durumu</a>
+        </li>
+				<li>
+          <a href="/results/">Sonuçlar</a>
+        </li>
+				<li>
+          <a href="/download/">İndir</a>
+        </li>
+				<li>
+          <a href="../logout/">Çıkış</a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+
+		<div class="container">
+
+			<div class="row" style="margin-top:70px ">
+                <div class="col-md-4"><label>Dosya Ekle</label></div>
+                <div class="col-md-4"><label>Eklenenler</label></div>
+                <div class="col-md-4"><label>Analize Başla</label>
+
+            </div>
+
+			<div class="row">
+
+				<div class="col-md-4">
+                    <form method="post" action="../upload/" enctype="multipart/form-data"> {% csrf_token %}
+                        <br>
+                        <input type="file" name="files" class"form-control"  multiple/>
+                        <br>
+                        <input type="submit" class="btn btn-primary" value="Dosyalari Yukle"/>
+                    </form>
+                </div>
+
+				<div class="col-md-4" id= "candidates">
+
+				</div>
+
+
+          <div class="col-md-2">
+						<br>
+						<select type="textbox" class="form-control" id = "readTypeSelect" name="type" onchange="determineReadType()">
+						<option id = "pair" value="pair">Çift Taraflı Okuma</option>
+						<option id = "single" value="single">Tek Taraflı Okuma</option>
+					</select>
+					<br>
+					<input type = "text" class = "form-control" onkeyup="updateAction()" id="project" />
+					<input type = "text" class = "form-control" id = "readType" name = "readType" style = "display:none"/>
+					<br>
+					<form method="POST" action="../startAnalysis//" id="analysisForm">
+
+						<button type="submit" id = "addButton" disabled="disabled" class="btn btn-success" style = "margin-top: 5px;">Analize Basla</button>
+						{% csrf_token %}
+					</form>
+				</div>
+
+			</div>
+
+		</div>
+	</body>
+	<script>
+		filesList = {{filesList|safe}}
+		folderList = {{folderList|safe}}
+
+		function createList(){
+            for (i = 0; i < filesList.length; i++) {
+            d3.select('#candidates').append("tr").attr("id", 'tr_'+i).append("td").attr('id',"file_"+i).append("text").text(filesList[i])
+            d3.select('#tr_'+i).append('td').append("a").attr("href", "/index/remove/" + filesList[i]).append("button").attr("type", "button").attr("class","btn-xs btn-danger").style("margin-left","15px").style("margin-top","5px").append("i").attr("class","fa fa-trash")
+
+
+            //.attr("id","button_"+i).attr("class", "btn btn-circle btn-danger btn-sm ").attr("onclick", "removeFolder(this.id)").append("i").attr("class", "glyphicon glyphicon-minus")
+            }
+
+						determineReadType()
+        }
+
+		//Bu kisim kullanilmiyor.
+		function removeFolder(id){
+			newid = id.split("_")[1]
+			file = d3.select('#file_'+newid).text()
+
+
+		}
+
+		function updateAction(){
+			e = document.getElementById("readTypeSelect");
+			selectedType = e.options[e.selectedIndex].value;
+
+			newAction = '/startAnalysis/' + document.getElementById('project').value + ':;' + selectedType +"/";
+			document.getElementById('analysisForm').action = newAction;
+
+			alphanum = document.getElementById('project').value.replace(/[^0-9a-zA-Z _.çÇıĞöÖşŞüÜ]/gi, '')
+			document.getElementById("project").value = alphanum;
+			folderControl = folderList.indexOf(alphanum)
+			if (alphanum.length > 0 && filesList.length>0 && folderControl <  1) {
+				d3.select('#addButton').attr('disabled',null)
+			} else {
+			    d3.select('#addButton').attr('disabled',true)
+			}
+		}
+
+		function determineReadType() {
+			e = document.getElementById("readTypeSelect");
+			selectedType = e.options[e.selectedIndex].value;
+			document.getElementById("readType").value = selectedType
+
+		}
+
+		createList()
+	</script>
+</html>

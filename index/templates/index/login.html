@@ -1,0 +1,60 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  {% load static %}
+    <head>
+        <title>Lütfen giriş yapın.</title>
+
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"> </script>
+        <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+        <script type="text/javascript" src="{% static 'd3/d3.min.js' %}"> </script>
+        <link rel="stylesheet" href="../static/bootstrap3/css/bootstrap.min.css">
+        <script type="text/javascript" src="{% static 'bootstrap3/js/bootstrap.min.js' %}"> </script>
+
+		<style>
+		.logo img {
+				height: 100px;
+				width: auto;
+				}
+		</style>
+    </head>
+
+    <body>
+    	<div style ="text-align: center">
+			<a href="./" class="navbar-default" style="margin:0 auto;display:block;"><div class="logo" style="float:none" ><img  src="{% static 'img/logo.png' %}"/></div></a>
+		</div>
+
+		<br><br><br>
+
+		{% if user.is_authenticated %}
+			<h2 style="text-align:center" class="text-success">{{user.username}} olarak oturum açmıştınız zaten.</h2>
+		{% else %}
+
+        <form id="login_form" method="post" action="/login/" role="form">
+        	{% csrf_token %}
+		  <div class="form-group form-group-lg row">
+
+		  	<div class="col-md-4"></div>
+			<label for="user" class="col-md-1 form-control-label">Kullanıcı Adı</label>
+			<div class="col-md-3">
+			  <input type="text" class="form-control" id="user" name="user" placeholder="">
+			</div>
+		  </div>
+		  <div class="form-group form-group-lg row">
+		  	<div class="col-md-4"></div>
+			<label for="pass" class="col-md-1 form-control-label">Şifre</label>
+			<div class="col-md-3">
+			  <input type="password" class="form-control" id="pass" name="pass" placeholder="">
+			</div>
+		  </div>
+
+		  <div class="form-group row">
+			<div class="col-md-offset-4 col-md-4">
+			  <button type="submit" class="btn btn-success btn-block">Giriş</button>
+			</div>
+		  </div>
+		</form>
+		{% endif %}
+
+    </body>
+</html>
